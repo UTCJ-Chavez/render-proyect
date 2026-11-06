@@ -1,6 +1,18 @@
-FROM python:3.12-slim
+FROM node:18-alpine
+
+# Instalar Python para ejecutar las pruebas de CD en el build
+RUN apk add --no-cache python3
+
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY app.py .
-CMD gunicorn app:app --bind 0.0.0.0:${PORT:-8000}
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+# Ejecutar el test: si Python da error (esperado=5), el build falla y Render se pone en ROJO
+RUN python3 test.py
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
