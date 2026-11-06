@@ -2,8 +2,8 @@ import sys
 
 def test_suma_basica():
     resultado = 2 + 2
-    esperado = 4  # <--- CORREGIDO
-    
+    esperado = 5  # <--- FALLO INTENCIONAL PARA RENDER
+
     assert resultado == esperado, f"Error: Se esperaba {esperado} pero se obtuvo {resultado}"
     print("✅ Todas las pruebas pasaron correctamente.")
 
