@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: flask-api
+    name: render-proyect
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app"
+    buildCommand: "python test.py"
+    startCommand: "python index.py"
